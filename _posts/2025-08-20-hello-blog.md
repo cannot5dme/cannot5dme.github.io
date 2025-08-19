@@ -6,7 +6,7 @@ categories: 随笔
 tags: [入门, GitHub Pages, Jekyll]
 ---
 
-这是我的第一篇文章。
+欣赏一下jk老照片吧。
 
 ![我的图片](/assets/img/2.jpg)
 
