@@ -3,7 +3,7 @@ layout: post
 title: "测试贴子"
 date: 2025-08-20 00:00:00 +0900
 categories: 随笔
-tags: [入门, jk]
+tags: [jk]
 ---
 
 欣赏一下jk老照片吧。
