@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "第一篇文章：Hello Blog"
+title: "测试贴子"
 date: 2025-08-20 00:00:00 +0900
 categories: 随笔
 tags: [入门, GitHub Pages, Jekyll]
