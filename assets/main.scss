@@ -1,0 +1,12 @@
+---
+---
+@import "minima";   /* 先加载主题样式 */
+
+/* 自定义背景图 */
+body{
+  background-image: url("/assets/img/IMG_9661.JPG");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
