@@ -1,0 +1,39 @@
+---
+layout: default
+title: 主页
+---
+
+<div class="search-bar">
+  <input id="searchInput" type="text" placeholder="搜索文章标题…">
+</div>
+
+<div class="tag-filter">
+  <button class="tag-btn active" data-tag="__all">全部</button>
+  {% assign tag_names = site.tags | map: 'first' | sort %}
+  {% for t in tag_names %}
+    <button class="tag-btn" data-tag="{{ t | downcase }}">{{ t }}</button>
+  {% endfor %}
+</div>
+
+<ul id="postList" class="post-list">
+  {% for post in site.posts %}
+    <li class="post-item"
+        data-title="{{ post.title | downcase | escape }}"
+        data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
+      <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <div class="post-meta">
+        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        {% if post.tags and post.tags.size > 0 %}
+          <span class="post-tags">
+            {% for tg in post.tags %}
+              <a href="javascript:void(0)" class="tag-chip" data-tag="{{ tg | downcase }}">{{ tg }}</a>
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>{% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
