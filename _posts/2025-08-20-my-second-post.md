@@ -8,7 +8,7 @@ tags: [jk]
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
   {% for image in site.static_files %}
     {% if image.path contains 'assets/album1/' %}
-      <img src="{{ image.path }}" alt="album image" style="width:100%">
+      <img src="{{ site.baseurl }}{{ image.path }}" alt="album image" style="width:100%">
     {% endif %}
   {% endfor %}
 </div>
