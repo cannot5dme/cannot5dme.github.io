@@ -6,9 +6,6 @@ categories: 随笔
 tags: [jk]
 ---
 
-这是我的第二篇文章的内容。
-
-插入一张图片测试：
 
 ![测试图片](/assets/img/IMG_9661.JPG)
 
