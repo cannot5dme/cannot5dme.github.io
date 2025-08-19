@@ -1,3 +1,8 @@
+minima:
+  skin: classic
+
+sass:
+  style: compressed
 title: JCJK制服至上的电波主页 (〃▽〃) ♡⌒✿ (灬º‿º灬) 
 description: 用 GitHub Pages + Jekyll（minima 主题）搭建
 theme: minima
