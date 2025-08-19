@@ -3,24 +3,27 @@ layout: default
 title: 主页
 ---
 
-<div class="home-intro">
-  <h1>欢迎来到我的博客！</h1>
+<!-- 欢迎语 -->
+<section class="home-intro wrapper">
+  <h1>欢迎来到属于制服迷的专属空间！</h1>
   <p>这里是 <strong>JCJK</strong> 真实的讨论领域。</p>
-</div>
+</section>
 
-
-<div class="search-bar">
+<!-- 标题搜索 -->
+<section class="search-bar">
   <input id="searchInput" type="text" placeholder="搜索文章标题…">
-</div>
+</section>
 
-<div class="tag-filter">
+<!-- 标签筛选（自动读取所有 tags） -->
+<section class="tag-filter">
   <button class="tag-btn active" data-tag="__all">全部</button>
   {% assign tag_names = site.tags | map: 'first' | sort %}
   {% for t in tag_names %}
     <button class="tag-btn" data-tag="{{ t | downcase }}">{{ t }}</button>
   {% endfor %}
-</div>
+</section>
 
+<!-- 文章列表 -->
 <ul id="postList" class="post-list">
   {% for post in site.posts %}
     <li class="post-item"
@@ -40,6 +43,10 @@ title: 主页
       {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>{% endif %}
     </li>
   {% endfor %}
+  {% if site.posts == empty %}
+    <li class="post-item"><em>暂时还没有文章，去 _posts 新建一篇吧～</em></li>
+  {% endif %}
 </ul>
 
+<!-- 搜索/筛选逻辑 -->
 <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
