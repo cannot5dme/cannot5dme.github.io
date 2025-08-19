@@ -10,3 +10,4 @@ tags: [入门, jk]
 
 ![我的图片](/assets/img/2.jpg)
 
+- 回到主页 [点击](https://cannot5dme.github.io)
