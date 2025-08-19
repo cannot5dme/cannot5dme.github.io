@@ -1,0 +1,14 @@
+title: 我的个人博客
+description: 用 GitHub Pages + Jekyll（minima 主题）搭建
+theme: minima
+locale: zh-CN
+plugins:
+  - jekyll-feed
+
+# 导航（可选）：把这些页面显示在顶部导航栏
+header_pages:
+  - about.md
+
+# 显示日期格式（中文）
+minima:
+  date_format: "%Y年%-m月%-d日"
