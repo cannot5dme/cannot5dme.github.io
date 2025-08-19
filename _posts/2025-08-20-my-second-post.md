@@ -12,5 +12,4 @@ tags: [jk]
 
 ![测试图片](/assets/img/IMG_9661.JPG)
 
-- 支持 **Markdown** 语法
-- 也支持 [超链接](https://cannot5dme.github.io)
+- 回到主页 [点击](https://cannot5dme.github.io)
