@@ -1,7 +1,11 @@
+---
+---
+@import "minima";   /* 保留原主题样式 */
+
 body {
-  background-image: url('/assets/img/IMG_9661.JPG'); /* 改成你的背景图文件名 */
-  background-size: cover;       /* 拉伸填满屏幕 */
-  background-repeat: no-repeat; /* 不重复 */
-  background-attachment: fixed; /* 页面滚动时背景固定 */
-  background-position: center;  /* 居中显示 */
+  background-image: url('/assets/img/IMG_9661.JPG');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
