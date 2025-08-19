@@ -1,12 +1,44 @@
 ---
 ---
-@import "minima";   /* 先加载主题样式 */
 
-/* 自定义背景图 */
-body{
-  background-image: url("/assets/img/IMG_9661.JPG");
+@import "minima";   /* 保留原主题样式 */
+
+/* 🌄 背景图设置 */
+body {
+  background: url("/assets/img/IMG_9661.JPG") no-repeat center center fixed;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  font-family: "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 📑 内容区半透明白色背景 */
+.wrapper {
+  background: rgba(255, 255, 255, 0.85); /* 半透明 */
+  padding: 2rem;
+  border-radius: 10px;   /* 圆角 */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* 阴影 */
+  max-width: 960px;      /* 限制宽度 */
+  margin: 2rem auto;     /* 居中 */
+}
+
+/* 📰 标题美化 */
+h1, h2, h3, h4 {
+  font-weight: bold;
+  color: #222;
+}
+
+/* 🔗 链接高亮 */
+a {
+  color: #0055aa;
+}
+a:hover {
+  color: #ff6600;
+  text-decoration: underline;
+}
+
+/* 📱 手机端优化 */
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin: 1rem;
+    padding: 1rem;
+  }
 }
