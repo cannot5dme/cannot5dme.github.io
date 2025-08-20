@@ -1,54 +1,80 @@
----
-layout: default
-title: 主页
----
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>我的博客主页</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    h1 { color: #333; }
+    .search-box { margin-bottom: 20px; }
+    .post { margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ddd; }
+    .tags { margin-bottom: 20px; }
+    .tag { margin-right: 10px; cursor: pointer; color: blue; text-decoration: underline; }
+  </style>
+  <!-- 访问计数器 -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+  <!-- 欢迎语 -->
+  <h1>欢迎来到我的博客！</h1>
+  <p>这里是 JCJK 真实的讨论领域。</p>
 
-<!-- 欢迎语 -->
-<section class="home-intro wrapper">
-  <h1>欢迎来到属于制服迷的专属空间！</h1>
-  <p>这里是 <strong>JCJK</strong> 爱好者的秘密讨论领域。</p>
-</section>
+  <!-- 搜索栏 -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索文章标题..." onkeyup="searchPosts()">
+  </div>
 
-对上脑电波的人可以友善交流，企鹅群：208530946，以及blogger地址：gerenxiaoshijie.blogspot.com。
+  <!-- 标签分类 -->
+  <div class="tags">
+    <span class="tag" onclick="filterPosts('all')">全部</span>
+    {% assign all_tags = site.tags | sort %}
+    {% for tag in all_tags %}
+      <span class="tag" onclick="filterPosts('{{ tag[0] }}')">{{ tag[0] }}</span>
+    {% endfor %}
+  </div>
 
-<!-- 标题搜索 -->
-<section class="search-bar">
-  <input id="searchInput" type="text" placeholder="搜索文章标题…">
-</section>
-
-<!-- 标签筛选（自动读取所有 tags） -->
-<section class="tag-filter">
-  <button class="tag-btn active" data-tag="__all">全部</button>
-  {% assign tag_names = site.tags | map: 'first' | sort %}
-  {% for t in tag_names %}
-    <button class="tag-btn" data-tag="{{ t | downcase }}">{{ t }}</button>
-  {% endfor %}
-</section>
-
-<!-- 文章列表 -->
-<ul id="postList" class="post-list">
-  {% for post in site.posts %}
-    <li class="post-item"
-        data-title="{{ post.title | downcase | escape }}"
-        data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
-      <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-      <div class="post-meta">
-        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        {% if post.tags and post.tags.size > 0 %}
-          <span class="post-tags">
-            {% for tg in post.tags %}
-              <a href="javascript:void(0)" class="tag-chip" data-tag="{{ tg | downcase }}">{{ tg }}</a>
-            {% endfor %}
-          </span>
-        {% endif %}
+  <!-- 文章列表 -->
+  <div id="postList">
+    {% for post in site.posts %}
+      <div class="post" data-title="{{ post.title | downcase }}" data-tags="{{ post.tags | join: ' ' }}">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p>{{ post.excerpt }}</p>
+        <p><small>标签: {{ post.tags | join: ', ' }}</small></p>
       </div>
-      {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>{% endif %}
-    </li>
-  {% endfor %}
-  {% if site.posts == empty %}
-    <li class="post-item"><em>暂时还没有文章，去 _posts 新建一篇吧～</em></li>
-  {% endif %}
-</ul>
+    {% endfor %}
+  </div>
 
-<!-- 搜索/筛选逻辑 -->
-<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+  <!-- 访问次数 -->
+  <footer style="margin-top: 40px; font-size: 14px; color: gray;">
+    本站访问次数：<span id="busuanzi_value_site_pv">-</span>
+  </footer>
+
+  <!-- JS 功能 -->
+  <script>
+    function searchPosts() {
+      var input = document.getElementById('searchInput').value.toLowerCase();
+      var posts = document.querySelectorAll('#postList .post');
+      posts.forEach(function(post) {
+        var title = post.getAttribute('data-title');
+        if (title.includes(input)) {
+          post.style.display = 'block';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    }
+
+    function filterPosts(tag) {
+      var posts = document.querySelectorAll('#postList .post');
+      posts.forEach(function(post) {
+        var tags = post.getAttribute('data-tags').split(' ');
+        if (tag === 'all' || tags.includes(tag)) {
+          post.style.display = 'block';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
