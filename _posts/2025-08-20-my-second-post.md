@@ -28,6 +28,5 @@ tags: [jk,free]
   {% endfor %}
 </div>
 
-![测试图片](/assets/img/IMG_9661.JPG)
 
 - 回到主页 [点击](https://cannot5dme.github.io)
