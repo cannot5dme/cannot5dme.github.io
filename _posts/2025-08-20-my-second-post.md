@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "JK杂图"
+title: "A2-JK杂图"
 date: 2025-08-20 00:00:00 +0900
 categories: 随笔
-tags: [jk]
+tags: [jk,free]
 ---
 
 <!-- 一行一张大图的样式（只影响本页） -->
