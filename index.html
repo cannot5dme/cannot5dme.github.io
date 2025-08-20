@@ -30,6 +30,19 @@ title: 主页
   {% endfor %}
 </section>
 
+<!-- 标签筛选（自动读取所有 tags） -->
+<section class="tag-filter">
+  <button class="tag-btn active" data-tag="__all">全部</button>
+
+  {%- assign tag_pairs = site.tags | sort -%}
+  {%- for tag in tag_pairs -%}
+    {%- assign name = tag[0] | downcase | strip -%}
+    {%- if name != '' -%}
+      <button class="tag-btn" data-tag="{{ name }}">{{ name }}</button>
+    {%- endif -%}
+  {%- endfor -%}
+</section>
+
 <!-- 文章列表 -->
 <ul id="postList" class="post-list">
   {% for post in site.posts %}
