@@ -21,14 +21,6 @@ title: 主页
   <input id="searchInput" type="text" placeholder="搜索文章标题…">
 </section>
 
-<!-- 标签筛选（自动读取所有 tags） -->
-<section class="tag-filter">
-  <button class="tag-btn active" data-tag="__all">全部</button>
-  {% assign tag_names = site.tags | map: 'first' | sort %}
-  {% for t in tag_names %}
-    <button class="tag-btn" data-tag="{{ t | downcase }}">{{ t }}</button>
-  {% endfor %}
-</section>
 
 <!-- 标签筛选（自动读取所有 tags） -->
 <section class="tag-filter">
