@@ -42,7 +42,9 @@ title: 主页
     <li class="post-item"
         data-title="{{ post.title | downcase | escape }}"
         data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
-      <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <h3 class="post-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h3>
       <div class="post-meta">
         <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
         {% if post.tags and post.tags.size > 0 %}
@@ -53,7 +55,7 @@ title: 主页
           </span>
         {% endif %}
       </div>
-      {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>{% endif %}
+      <!-- 不显示 excerpt，已删除 -->
     </li>
   {% endfor %}
   {% if site.posts == empty %}
