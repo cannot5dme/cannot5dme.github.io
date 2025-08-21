@@ -36,9 +36,9 @@ title: 主页
   {%- endfor -%}
 </section>
 
-<!-- 文章列表（分页：paginator.posts） -->
+<!-- 文章列表（使用 paginator.posts 实现分页） -->
 <ul id="postList" class="post-list">
-  {% for post in paginator.posts %}   <!-- 👈 改成 paginator.posts -->
+  {% for post in paginator.posts %}
     <li class="post-item"
         data-title="{{ post.title | downcase | escape }}"
         data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
@@ -63,15 +63,19 @@ title: 主页
 </ul>
 
 
+
 <!-- 搜索/筛选逻辑 -->
 <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
 
-  <!-- 分页（仅显示当前页前后各2页） -->
-{% if paginator and paginator.total_pages > 1 %}
-  {% assign start = paginator.page | minus: 2 %}
+<!-- 分页（当前页前后各2页；只有1页也显示“1”） -->
+{% if paginator %}
+  {% assign total = paginator.total_pages %}
+  {% assign current = paginator.page %}
+
+  {% assign start = current | minus: 2 %}
   {% if start < 1 %}{% assign start = 1 %}{% endif %}
-  {% assign end = paginator.page | plus: 2 %}
-  {% if end > paginator.total_pages %}{% assign end = paginator.total_pages %}{% endif %}
+  {% assign end = current | plus: 2 %}
+  {% if end > total %}{% assign end = total %}{% endif %}
 
   <nav class="pagination" style="margin:26px 0; text-align:center;">
     {% if paginator.previous_page %}
@@ -81,7 +85,7 @@ title: 主页
     {% endif %}
 
     {% for p in (start..end) %}
-      {% if p == paginator.page %}
+      {% if p == current %}
         <span class="page-btn active">{{ p }}</span>
       {% else %}
         <a href="{{ paginator.paginate_path | replace: ':num', p | relative_url }}" class="page-btn">{{ p }}</a>
@@ -107,4 +111,3 @@ title: 主页
 .page-btn.active{ background:#0073e6; color:#fff; border-color:#0073e6; font-weight:700; }
 .page-btn.disabled{ background:#eee; color:#aaa; border-color:#ddd; cursor:not-allowed; }
 </style>
-
