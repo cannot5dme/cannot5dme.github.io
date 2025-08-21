@@ -36,9 +36,9 @@ title: 主页
   {%- endfor -%}
 </section>
 
-<!-- 文章列表 -->
+<!-- 文章列表（分页：paginator.posts） -->
 <ul id="postList" class="post-list">
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}   <!-- 👈 改成 paginator.posts -->
     <li class="post-item"
         data-title="{{ post.title | downcase | escape }}"
         data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
@@ -55,13 +55,56 @@ title: 主页
           </span>
         {% endif %}
       </div>
-      <!-- 不显示 excerpt，已删除 -->
     </li>
   {% endfor %}
-  {% if site.posts == empty %}
+  {% if paginator.posts == empty %}
     <li class="post-item"><em>暂时还没有文章，去 _posts 新建一篇吧～</em></li>
   {% endif %}
 </ul>
 
+
 <!-- 搜索/筛选逻辑 -->
 <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+
+  <!-- 分页（仅显示当前页前后各2页） -->
+{% if paginator and paginator.total_pages > 1 %}
+  {% assign start = paginator.page | minus: 2 %}
+  {% if start < 1 %}{% assign start = 1 %}{% endif %}
+  {% assign end = paginator.page | plus: 2 %}
+  {% if end > paginator.total_pages %}{% assign end = paginator.total_pages %}{% endif %}
+
+  <nav class="pagination" style="margin:26px 0; text-align:center;">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="page-btn">« Prev</a>
+    {% else %}
+      <span class="page-btn disabled">« Prev</span>
+    {% endif %}
+
+    {% for p in (start..end) %}
+      {% if p == paginator.page %}
+        <span class="page-btn active">{{ p }}</span>
+      {% else %}
+        <a href="{{ paginator.paginate_path | replace: ':num', p | relative_url }}" class="page-btn">{{ p }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}" class="page-btn">Next »</a>
+    {% else %}
+      <span class="page-btn disabled">Next »</span>
+    {% endif %}
+  </nav>
+{% endif %}
+
+<style>
+/* 圆角分页按钮样式 */
+.page-btn{
+  display:inline-block; margin:0 4px; padding:6px 14px;
+  border-radius:20px; border:1px solid #ccc; background:#f8f8f8;
+  color:#333; text-decoration:none; font-size:14px; transition:.2s;
+}
+.page-btn:hover{ background:#0073e6; color:#fff; border-color:#0073e6; }
+.page-btn.active{ background:#0073e6; color:#fff; border-color:#0073e6; font-weight:700; }
+.page-btn.disabled{ background:#eee; color:#aaa; border-color:#ddd; cursor:not-allowed; }
+</style>
+
