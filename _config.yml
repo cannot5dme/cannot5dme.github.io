@@ -17,3 +17,9 @@ header_pages:
 # 显示日期格式（中文）
 minima:
   date_format: "%Y年%-m月%-d日"
+
+plugins:
+  - jekyll-paginate
+
+paginate: 20                 # 每页 20 篇
+paginate_path: "/page:num/"  # 翻页路径，如 /page2/ /page3/
