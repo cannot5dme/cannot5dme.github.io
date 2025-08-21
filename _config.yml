@@ -1,25 +1,21 @@
-minima:
-  skin: classic
-
-sass:
-  style: compressed
-title: JCJK制服至上的电波主页 (〃▽〃) ♡⌒✿ (灬º‿º灬) 
+title: JCJK制服至上的电波主页 (〃▽〃) ♡⌒✿ (灬º‿º灬)
 description: 用 GitHub Pages + Jekyll（minima 主题）搭建
 theme: minima
 locale: zh-CN
-plugins:
-  - jekyll-feed
 
-# 导航（可选）：把这些页面显示在顶部导航栏
+minima:
+  skin: classic
+  date_format: "%Y年%-m月%-d日"
+
+sass:
+  style: compressed
+
 header_pages:
   - about.md
 
-# 显示日期格式（中文）
-minima:
-  date_format: "%Y年%-m月%-d日"
-
 plugins:
+  - jekyll-feed
   - jekyll-paginate
 
-paginate: 10                 # 每页 10 篇
+paginate: 10                 # 每页 10 篇（测试想强制出现分页可暂时改成 2）
 paginate_path: "/page:num/"  # /page2/ /page3/ ...
