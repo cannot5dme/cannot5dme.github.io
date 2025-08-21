@@ -21,5 +21,5 @@ minima:
 plugins:
   - jekyll-paginate
 
-paginate: 20                 # 每页 20 篇
-paginate_path: "/page:num/"  # 翻页路径，如 /page2/ /page3/
+paginate: 10                 # 每页 10 篇
+paginate_path: "/page:num/"  # /page2/ /page3/ ...
