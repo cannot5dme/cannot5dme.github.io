@@ -1,64 +1,54 @@
----
-layout: default
-title: 主页
----
-
-
-<!-- 欢迎语 -->
-<section class="home-intro wrapper">
-  <h1>欢迎来到属于制服迷的专属空间！</h1>
-  <p>这里是 <strong>JCJK</strong> 真实的讨论领域。</p>
-  <p>这里是 <strong>JCJK</strong> 爱好者的秘密讨论领域。</p>
-</section>
-
-<section class="home-intro wrapper">
-  <p>对上脑电波的人可以友善交流，企鹅群：208530946，以及blogger地址：gerenxiaoshijie.blogspot.com。</p>
-  <p>帖子的分级规则：A级为无黄色内容；B级为露内衣的成人内容；C级为赤裸18+成人内容。请按照需求进行观看。</p>
-</section>
-
-<!-- 标题搜索 -->
-<section class="search-bar">
-  <input id="searchInput" type="text" placeholder="搜索文章标题…">
-</section>
-
-
-<!-- 标签筛选（自动读取所有 tags） -->
-<section class="tag-filter">
-  <button class="tag-btn active" data-tag="__all">全部</button>
-
-  {%- assign tag_pairs = site.tags | sort -%}
-  {%- for tag in tag_pairs -%}
-    {%- assign name = tag[0] | downcase | strip -%}
-    {%- if name != '' -%}
-      <button class="tag-btn" data-tag="{{ name }}">{{ name }}</button>
-    {%- endif -%}
-  {%- endfor -%}
-</section>
-
-<!-- 文章列表 -->
-<ul id="postList" class="post-list">
-  {% for post in site.posts %}
-    <li class="post-item"
-        data-title="{{ post.title | downcase | escape }}"
-        data-tags="{% if post.tags %}{{ post.tags | join:'|' | downcase }}{% endif %}">
-      <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-      <div class="post-meta">
-        <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
-        {% if post.tags and post.tags.size > 0 %}
-          <span class="post-tags">
-            {% for tg in post.tags %}
-              <a href="javascript:void(0)" class="tag-chip" data-tag="{{ tg | downcase }}">{{ tg }}</a>
-            {% endfor %}
-          </span>
-        {% endif %}
-      </div>
-      {% if post.excerpt %}<p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>{% endif %}
-    </li>
-  {% endfor %}
-  {% if site.posts == empty %}
-    <li class="post-item"><em>暂时还没有文章，去 _posts 新建一篇吧～</em></li>
+<!-- 分页按钮 -->
+<nav class="pagination" style="margin:26px 0; text-align:center;">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="page-btn">« Prev</a>
+  {% else %}
+    <span class="page-btn disabled">« Prev</span>
   {% endif %}
-</ul>
 
-<!-- 搜索/筛选逻辑 -->
-<script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <span class="page-btn active">{{ page }}</span>
+    {% else %}
+      <a href="{{ paginator.paginate_path | replace: ':num', page | relative_url }}" class="page-btn">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="page-btn">Next »</a>
+  {% else %}
+    <span class="page-btn disabled">Next »</span>
+  {% endif %}
+</nav>
+
+<style>
+.page-btn {
+  display: inline-block;
+  margin: 0 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+.page-btn:hover {
+  background: #0073e6;
+  color: #fff;
+  border-color: #0073e6;
+}
+.page-btn.active {
+  background: #0073e6;
+  color: #fff;
+  border-color: #0073e6;
+  font-weight: bold;
+}
+.page-btn.disabled {
+  background: #eee;
+  color: #aaa;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+</style>
